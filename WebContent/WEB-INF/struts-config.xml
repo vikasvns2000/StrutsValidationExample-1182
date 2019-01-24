@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" 
+"struts-config_1_1.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="employeeForm" type="com.jwt.struts.form.EmployeeForm" />
+		<form-bean name="UserForm" type="com.jwt.struts.form.UserForm"/>
+		<form-bean name="UserDispactForm" type="com.jwt.struts.form.UserDispactForm"/>
+	</form-beans>
+
+	<action-mappings>
+
+		<action path="/Register" type="com.jwt.struts.action.EmployeeAction"
+			name="employeeForm"  scope="session" input="/pages/EmployeeRegister.jsp">
+
+			<forward name="success" path="/pages/success.jsp" />
+		</action>
+
+	
+        <action input="/index.jsp" name="UserForm" parameter="method" path="/UserAction" scope="session" 
+        															 type="com.jwt.struts.action.UserAction">
+            <forward name="success" path="/pages/index.jsp" />
+        </action>
+        <action input="/dispacthAction.jsp" parameter="method" name="UserDispactForm" path="/UserDispactAction" 
+         scope="session" type="com.jwt.struts.action.UserDispactAction">
+            <forward name="success" path="/pages/dispacthAction.jsp" />
+        </action>
+        <action path="/Welcome"  forward="/welcomeStruts.jsp"/>
+	</action-mappings>
+
+	<message-resources parameter="com.jwt.struts.action.ApplicationResource" />
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml, /WEB-INF/validation.xml" />
+
+	</plug-in>
+
+</struts-config>
